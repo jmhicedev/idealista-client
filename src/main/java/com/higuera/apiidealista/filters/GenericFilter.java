@@ -15,6 +15,8 @@ import com.higuera.apiidealista.model.Center;
 
 public class GenericFilter extends AbstractFilter {
 	
+	public final static int MAX_MAXITEMS = 50;
+	
 	private CountryType country;
 	private OperationType operation;
 	private PropertyTypeType propertyType;
@@ -62,6 +64,13 @@ public class GenericFilter extends AbstractFilter {
 		return map;
 	}
 	
+	public boolean validate() throws Exception {
+		if(this.maxItems > GenericFilter.MAX_MAXITEMS) {
+			throw new Exception("Max value for maxItems is " + GenericFilter.MAX_MAXITEMS);
+		}
+		
+		return super.validate();
+	}
 	
 	public GenericFilter(AuthResponseDTO authResponse) {
 		super(authResponse);

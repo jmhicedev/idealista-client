@@ -17,6 +17,11 @@ public class SearchResponseDTO {
 	private List<ElementList> elementList;
 	
 	
+	public String toString() {
+		return this.getClass().getSimpleName() + "[size: " + elementList.size() + " items of " + total + "]";
+	}
+	
+	
 	/* Getters and Setters */
 	public Integer getActualPage() {
 		return actualPage;

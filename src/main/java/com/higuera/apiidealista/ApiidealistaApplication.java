@@ -9,8 +9,10 @@ import org.springframework.web.client.RestTemplate;
 import com.higuera.apiidealista.dto.AuthResponseDTO;
 import com.higuera.apiidealista.dto.SearchResponseDTO;
 import com.higuera.apiidealista.filters.GenericFilter;
+import com.higuera.apiidealista.filters.model.LocationIdType;
 import com.higuera.apiidealista.filters.model.OperationType;
 import com.higuera.apiidealista.filters.model.PropertyTypeType;
+import com.higuera.apiidealista.filters.model.SinceDateType;
 import com.higuera.apiidealista.services.AuthServiceImpl;
 import com.higuera.apiidealista.services.SearchServiceImpl;
 
@@ -25,11 +27,13 @@ public class ApiidealistaApplication {
 		
 		SearchServiceImpl searchService = ctx.getBean(SearchServiceImpl.class);
 		GenericFilter filter = new GenericFilter(authResponse);
-		filter.setLocationId("0-EU-ES-28");
+		filter.setLocationId(LocationIdType.MADRID.getValue());
 		filter.setPropertyType(PropertyTypeType.HOMES);
-		filter.setOperation(OperationType.RENT);
+		filter.setOperation(OperationType.SALE);
+		filter.setSinceDate(SinceDateType.LAST_WEEK);
+		filter.setMaxItems(50);
 		SearchResponseDTO searchResponse = searchService.search(filter);
-		searchResponse.toString();
+		System.out.println(searchResponse.toString());
 	}
 	
 	@Bean
