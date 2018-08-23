@@ -11,7 +11,6 @@ public class ParkingSpace {
 	}
 	
 	public ParkingSpace(Boolean hasParkingSpace, Boolean isParkingSpaceIncludedInPrice, Double parkingSpacePrice) {
-		super();
 		this.hasParkingSpace = hasParkingSpace;
 		this.isParkingSpaceIncludedInPrice = isParkingSpaceIncludedInPrice;
 		this.parkingSpacePrice = parkingSpacePrice;

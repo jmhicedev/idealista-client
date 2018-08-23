@@ -2,6 +2,9 @@ package com.higuera.apiidealista.model;
 
 public class ElementList {
 	
+	//Identifier of the real state
+	private Integer propertyCode;
+	
 	private String address;
 	private Integer bathrooms;
 	private String country;
@@ -17,7 +20,6 @@ public class ElementList {
 	private Integer numPhotos;
 	private String operation;
 	private Integer price;
-	private Integer propertyCode;
 	private String province;
 	private String region;
 	private Integer rooms;

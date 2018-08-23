@@ -31,16 +31,14 @@ public class AuthServiceImpl {
 	
 	private static final Logger logger = LoggerFactory.getLogger(AuthServiceImpl.class);
 	
-	@Autowired
     private RestTemplate restTemplate;
 	
-	@Value("${idealista.apikey}")
-	private final String apikey = null;
-	@Value("${idealista.secret}")
-	private final String secret = null;
 	
+	public AuthServiceImpl(RestTemplate restTemplate){
+		this.restTemplate = restTemplate;
+	}
 
-	public AuthResponseDTO authenticate() throws JsonParseException, JsonMappingException, IOException {
+	public AuthResponseDTO authenticate(final String apikey, final String secret) throws JsonParseException, JsonMappingException, IOException {
 		
 		String baseUrl = "https://api.idealista.com";
 		String url = baseUrl + "/oauth/token";

@@ -35,6 +35,10 @@ public class SearchServiceImpl {
     private RestTemplate restTemplate;
 	
 	
+	public SearchServiceImpl(RestTemplate restTemplate) {
+		this.restTemplate = restTemplate;
+	}
+	
 	public SearchResponseDTO search(GenericFilter filter) throws Exception {
 		
 		String baseUrl = "https://api.idealista.com";
@@ -70,7 +74,7 @@ public class SearchServiceImpl {
 			try {
 				ObjectMapper om = new ObjectMapper();
 				ApiError apierror = om.readValue(e.getResponseBodyAsString(), ApiError.class);
-				logger.error(apierror.getError() + ": " + apierror.getError_description());
+				logger.error(apierror.getHttpStatus() + ": " + apierror.getMessage());
 			} catch (Exception e1) {
 				logger.error("There is no object ApiError in the error response");
 			} finally {

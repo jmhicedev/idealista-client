@@ -6,6 +6,7 @@ import org.springframework.util.MultiValueMap;
 import com.higuera.apiidealista.dto.AuthResponseDTO;
 import com.higuera.apiidealista.filters.model.CountryType;
 import com.higuera.apiidealista.filters.model.LocaleType;
+import com.higuera.apiidealista.filters.model.LocationIdType;
 import com.higuera.apiidealista.filters.model.OperationType;
 import com.higuera.apiidealista.filters.model.OrderType;
 import com.higuera.apiidealista.filters.model.PropertyTypeType;
@@ -23,7 +24,7 @@ public class GenericFilter extends AbstractFilter {
 	private Center center;
 	private LocaleType locale;
 	private Double distance;
-	private String locationId;
+	private LocationIdType locationId;
 	private Integer maxItems;
 	private Integer numPage;
 	private Double maxPrice;
@@ -47,7 +48,7 @@ public class GenericFilter extends AbstractFilter {
 		if(this.center != null) 		map.add("center", this.getCenter().getCoordinates());
 		if(this.locale != null) 		map.add("locale", this.getLocale().getValue());
 		if(this.distance != null) 		map.add("distance", this.getDistance().toString());
-		if(this.locationId != null) 	map.add("locationId", this.getLocationId());
+		if(this.locationId != null) 	map.add("locationId", this.getLocationId().getValue());
 		if(this.maxItems != null) 		map.add("maxItems", this.getMaxItems().toString());
 		if(this.numPage != null) 		map.add("numPage", this.getNumPage().toString());
 		if(this.maxPrice != null) 		map.add("maxPrice", this.getMaxPrice().toString());
@@ -75,8 +76,11 @@ public class GenericFilter extends AbstractFilter {
 	public GenericFilter(AuthResponseDTO authResponse) {
 		super(authResponse);
 	}
+	public GenericFilter() {
+		super();
+	}
 	
-	
+
 	/* Getters and Setters */
 	public CountryType getCountry() {
 		return country;
@@ -114,10 +118,10 @@ public class GenericFilter extends AbstractFilter {
 	public void setDistance(Double distance) {
 		this.distance = distance;
 	}
-	public String getLocationId() {
+	public LocationIdType getLocationId() {
 		return locationId;
 	}
-	public void setLocationId(String locationId) {
+	public void setLocationId(LocationIdType locationId) {
 		this.locationId = locationId;
 	}
 	public Integer getMaxItems() {

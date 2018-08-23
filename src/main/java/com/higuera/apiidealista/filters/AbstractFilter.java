@@ -28,6 +28,9 @@ public abstract class AbstractFilter {
 		return true;
 	}
 	
+	public AbstractFilter() {
+		
+	}
 	
 	public AbstractFilter(AuthResponseDTO authResponse) {
 		this.authResponse = authResponse;

@@ -27,6 +27,12 @@ public class AuthResponseDTO {
 				+ ", scope: " + this.scope + 
 			"]";
 	}
+	
+	public boolean isEmpty() {
+		if(this.access_token.isEmpty()) return true;
+		if(this.token_type.isEmpty()) return true;
+		return false;
+	}
 
 	
 	/* Getters and Setters */
