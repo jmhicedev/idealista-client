@@ -1,7 +1,5 @@
 package com.higuera.apiidealista.services;
 
-import java.io.IOException;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,20 +9,15 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.RestTemplate;
 
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.higuera.apiidealista.dto.ApiError;
 import com.higuera.apiidealista.dto.SearchResponseDTO;
 import com.higuera.apiidealista.filters.GenericFilter;
-
-import org.junit.Assert;
 
 @Service
 public class SearchServiceImpl {
@@ -73,7 +66,8 @@ public class SearchServiceImpl {
 			logger.error("HttpStatus: " + e.getLocalizedMessage());
 			try {
 				ObjectMapper om = new ObjectMapper();
-				ApiError apierror = om.readValue(e.getResponseBodyAsString(), ApiError.class);
+				String responseBody = e.getResponseBodyAsString();
+				ApiError apierror = om.readValue(responseBody, ApiError.class);
 				logger.error(apierror.getHttpStatus() + ": " + apierror.getMessage());
 			} catch (Exception e1) {
 				logger.error("There is no object ApiError in the error response");
@@ -84,7 +78,8 @@ public class SearchServiceImpl {
 		} catch (HttpServerErrorException e) {
 			logger.error("HttpStatus: " + e.getLocalizedMessage());
 			ObjectMapper om = new ObjectMapper();
-			ApiError apierror = om.readValue(e.getResponseBodyAsString(), ApiError.class);
+			String responseBody = e.getResponseBodyAsString();
+			ApiError apierror = om.readValue(responseBody, ApiError.class);
 			logger.error(apierror.getError() + ": " + apierror.getError_description());
 			throw e;
 		}

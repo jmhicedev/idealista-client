@@ -6,8 +6,6 @@ import java.util.Base64;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -61,12 +59,14 @@ public class AuthServiceImpl {
 			authResponse = responseEntity.getBody();
 		} catch (HttpClientErrorException e) {
 			ObjectMapper om = new ObjectMapper();
-			ApiError apierror = om.readValue(e.getResponseBodyAsString(), ApiError.class);
+			String responseBody = e.getResponseBodyAsString();
+			ApiError apierror = om.readValue(responseBody, ApiError.class);
 			logger.error(apierror.getError() + ": " + apierror.getError_description());
 			throw e;
 		} catch (HttpServerErrorException e) {
 			ObjectMapper om = new ObjectMapper();
-			ApiError apierror = om.readValue(e.getResponseBodyAsString(), ApiError.class);
+			String responseBody = e.getResponseBodyAsString();
+			ApiError apierror = om.readValue(responseBody, ApiError.class);
 			logger.error(apierror.getError() + ": " + apierror.getError_description());
 			throw e;
 		}
