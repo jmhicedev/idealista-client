@@ -1,5 +1,7 @@
 package com.higuera.apiidealista.filters;
 
+import java.util.Properties;
+
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 
@@ -78,6 +80,21 @@ public class GenericFilter extends AbstractFilter {
 	}
 	public GenericFilter() {
 		super();
+	}
+	public GenericFilter(Properties props) {
+		super();
+		if(props.containsKey("LocationId")) {
+			this.locationId = LocationIdType.valueOf(props.getProperty("LocationId"));
+		}
+		if(props.containsKey("PropertyType")) {
+			this.propertyType = PropertyTypeType.valueOf(props.getProperty("PropertyType"));
+		}
+		if(props.containsKey("Operation")) {
+			this.operation = OperationType.valueOf(props.getProperty("Operation"));
+		}
+		if(props.containsKey("SinceDate")) {
+			this.sinceDate = SinceDateType.valueOf(props.getProperty("SinceDate"));
+		}
 	}
 	
 

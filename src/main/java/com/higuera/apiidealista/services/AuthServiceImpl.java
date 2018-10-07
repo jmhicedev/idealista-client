@@ -59,7 +59,9 @@ public class AuthServiceImpl {
 			authResponse = responseEntity.getBody();
 		} catch (HttpClientErrorException e) {
 			ObjectMapper om = new ObjectMapper();
+			logger.error(e.getStatusCode() + " " + e.getStatusText() + ": " + e.getMessage());
 			String responseBody = e.getResponseBodyAsString();
+			logger.error(responseBody);
 			ApiError apierror = om.readValue(responseBody, ApiError.class);
 			logger.error(apierror.getError() + ": " + apierror.getError_description());
 			throw e;
